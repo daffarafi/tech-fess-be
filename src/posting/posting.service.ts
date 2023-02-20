@@ -36,6 +36,20 @@ export class PostingService {
     return this.prisma.posting.findMany({
       ...query,
       orderBy: { createdAt: 'desc' },
+      select: {
+        content: true,
+        createdAt: true,
+        id: true,
+        isPrivate: true,
+        updatedAt: true,
+        userId: true,
+        user: {
+          select: {
+            displayName: true,
+            username: true,
+          },
+        },
+      },
     });
   }
 
