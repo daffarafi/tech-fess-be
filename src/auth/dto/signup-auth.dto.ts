@@ -12,7 +12,7 @@ import {
 export class SignupAuthDto {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(15)
+  @MaxLength(50)
   displayName: string;
 
   @IsNotEmpty()

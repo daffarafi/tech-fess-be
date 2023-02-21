@@ -23,10 +23,10 @@ export class UserService {
     return users;
   }
 
-  async getUserById(userId: number) {
+  async getUserByUsername(username: string) {
     const user = await this.prisma.user.findUnique({
       where: {
-        id: userId,
+        username: username,
       },
       select: {
         id: true,
@@ -53,6 +53,37 @@ export class UserService {
     });
 
     if (!user) throw new NotFoundException('User tidak ditemukan!');
+
+    return user;
+  }
+
+  async checkEmail(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      select: {
+        id: true,
+        username: true,
+      },
+    });
+
+    if (!user) return { message: `Tidak ada user dengan email ${email}` };
+
+    return user;
+  }
+
+  async checkUsername(username: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!user) return { message: `Tidak ada user dengan username ${username}` };
 
     return user;
   }

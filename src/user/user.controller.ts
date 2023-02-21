@@ -29,9 +29,19 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
-  @Get(':id')
-  getUserById(@Param('id', ParseIntPipe) userId: number) {
-    return this.userService.getUserById(userId);
+  @Get(':username')
+  getUserByUsername(@Param('username') username: string) {
+    return this.userService.getUserByUsername(username);
+  }
+
+  @Get('checkemail/:email')
+  getUsernameByEmail(@Param('email') email: string) {
+    return this.userService.checkEmail(email);
+  }
+
+  @Get('checkusername/:username')
+  getUsernameByUsername(@Param('username') username: string) {
+    return this.userService.checkUsername(username);
   }
 
   @UseGuards(JwtCheck)

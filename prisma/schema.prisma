@@ -17,7 +17,7 @@ model User {
 
   displayName String   @map("display_name")
   username    String   @unique
-  birthdate   DateTime
+  birthdate   DateTime @db.Date
   biodata     String?
 
   email    String @unique
