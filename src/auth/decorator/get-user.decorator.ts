@@ -8,6 +8,6 @@ export const GetUser = createParamDecorator(
         return request.user[data];
       }
     }
-    return null;
+    return request.user;
   },
 );

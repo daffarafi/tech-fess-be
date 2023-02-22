@@ -1,7 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BadRequestException } from '@nestjs/common/exceptions';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+
+type UserWithClosefriends = Prisma.UserGetPayload<{
+  include: { closefriends: true };
+}>;
 
 @Injectable()
 export class ClosefriendService {
@@ -24,7 +28,7 @@ export class ClosefriendService {
       include: { closefriends: true },
     });
 
-    const { closefriends } = user as User;
+    const { closefriends } = user as User & UserWithClosefriends;
 
     const isFriendAlreadyAdded = closefriends.some(
       (closefriend) => closefriend.id === friendId,
@@ -63,7 +67,7 @@ export class ClosefriendService {
       include: { closefriends: true },
     });
 
-    const { closefriends } = user as User;
+    const { closefriends } = user as User & UserWithClosefriends;
 
     const isFriendAlreadyAdded = closefriends.some(
       (closefriend) => closefriend.id === friendId,
