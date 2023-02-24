@@ -95,7 +95,22 @@ export class UserService {
       },
       select: {
         id: true,
-        postings: true,
+        postings: {
+          select: {
+            content: true,
+            createdAt: true,
+            id: true,
+            isPrivate: true,
+            updatedAt: true,
+            userId: true,
+            user: {
+              select: {
+                displayName: true,
+                username: true,
+              },
+            },
+          },
+        },
         closefriends: true,
       },
     });
