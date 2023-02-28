@@ -96,6 +96,7 @@ export class UserService {
       select: {
         id: true,
         postings: {
+          orderBy: { createdAt: 'desc' },
           select: {
             content: true,
             createdAt: true,
