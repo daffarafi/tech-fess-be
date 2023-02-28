@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { PostingDto } from './dto';
 
@@ -83,6 +87,10 @@ export class PostingService {
     if (!posting || posting.userId !== userId)
       throw new ForbiddenException('Akses ditolak!');
 
+    if (posting.content === dto.content) {
+      throw new BadRequestException('Tidak ada perubahan pada content!');
+    }
+
     return this.prisma.posting.update({
       where: {
         id: postingId,
@@ -109,5 +117,7 @@ export class PostingService {
         id: postingId,
       },
     });
+
+    return { message: 'Postingan berhasil dihapus!' };
   }
 }

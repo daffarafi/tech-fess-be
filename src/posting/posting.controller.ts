@@ -51,7 +51,6 @@ export class PostingController {
   }
 
   @UseGuards(JwtGuard)
-  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   deletePostingById(
     @GetUser('id') userId: number,

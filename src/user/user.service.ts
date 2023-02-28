@@ -121,6 +121,7 @@ export class UserService {
     const closefriendsId = closefriends.map((closefriend) => closefriend.id);
 
     const filteredPostings = postings.filter((posting) => {
+      if (posting.userId === currentUserId) return true;
       const isCloseFriend = closefriendsId.includes(currentUserId as number);
       return !posting.isPrivate || isCloseFriend;
     });

@@ -9,7 +9,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { Param, Res } from '@nestjs/common/decorators';
+import { Param, Patch, Res } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { User } from '@prisma/client';
 import * as fs from 'fs';

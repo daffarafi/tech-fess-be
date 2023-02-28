@@ -1,15 +1,13 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class EditUserDto {
-  @IsEmail()
-  @IsOptional()
-  email?: string;
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(50)
+  displayName: string;
 
   @IsString()
+  @MaxLength(280)
   @IsOptional()
-  firstName?: string;
-
-  @IsString()
-  @IsOptional()
-  lastName?: string;
+  biodata?: string;
 }
